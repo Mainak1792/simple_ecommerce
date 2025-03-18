@@ -1,0 +1,51 @@
+version: '3.9.13'
+
+services:
+  # Flask backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ecommerce_flask
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_NAME: ecommerce_db
+      DB_USER: postgres
+      DB_PASS: postgres_password
+      DB_PORT: 5432
+    networks:
+      - ecommerce-net
+
+  # PostgreSQL database
+  db:
+    image: postgres:15
+    container_name: ecommerce_db
+    environment:
+      POSTGRES_DB: ecommerce_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres_password
+    ports:
+      - "5432:5432"
+    networks:
+      - ecommerce-net
+
+  # Nginx-based frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ecommerce_frontend
+    ports:
+      - "8080:80"   # Host port 8080 -> Container port 80
+    networks:
+      - ecommerce-net
+    depends_on:
+      - backend
+
+networks:
+  ecommerce-net:
+    driver: bridge

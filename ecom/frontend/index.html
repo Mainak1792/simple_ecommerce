@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Simple E-commerce UI</title>
+  </head>
+  <body>
+    <h1>Simple E-commerce Frontend</h1>
+
+    <!-- Button to initialize the DB -->
+    <button onclick="initDB()">Initialize DB</button>
+    <p id="initResult"></p>
+    <hr />
+
+    <!-- Get products -->
+    <h2>Get All Products</h2>
+    <button onclick="getProducts()">Show Products</button>
+    <div id="productsList"></div>
+    <hr />
+
+    <!-- Add new product -->
+    <h2>Add a New Product</h2>
+    <label for="productName">Name:</label>
+    <input type="text" id="productName" />
+    <label for="productPrice">Price:</label>
+    <input type="text" id="productPrice" />
+    <button onclick="addProduct()">Add Product</button>
+    <p id="addResult"></p>
+    <hr />
+
+    <!-- Delete a product -->
+    <h2>Delete Product</h2>
+    <label for="deleteId">Product ID:</label>
+    <input type="number" id="deleteId" />
+    <button onclick="deleteProduct()">Delete Product</button>
+    <p id="deleteResult"></p>
+
+    <!-- Load JS -->
+    <script src="main.js"></script>
+  </body>
+</html>
